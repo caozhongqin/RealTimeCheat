@@ -1,0 +1,30 @@
+import pyperclip
+import regex
+import time
+from bs4 import BeautifulSoup
+import urllib.request
+
+lang_arr = ['java', 'python', 'js', 'php']
+
+lang = 'python'
+def snippet(order):
+    with urllib.request.urlopen('http://cht.sh/' + lang + '/' + order + '/?T') as f:
+        html = f.read().decode('utf-8')
+    soup = BeautifulSoup(html, features="html.parser")
+    return soup.pre.text
+
+
+last_word = ''
+while True:
+    word = pyperclip.paste()
+    if word != last_word:
+        last_word = word
+        if regex.fullmatch(r'[a-zA-Z ]+', word):
+            if word in lang_arr:
+                lang = word
+                print('>>> switch lang to ' + lang)
+                continue
+            print('>>> ' + lang + ' ' + word)
+            word = word.replace(' ', '+')
+            print(snippet(word))
+    time.sleep(0.5)
