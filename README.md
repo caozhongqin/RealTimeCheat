@@ -14,3 +14,6 @@ https://pypi.org/project/beautifulsoup4/
 
 ## 运行
 python3 clip_cht.py
+
+## 示例
+![可以运行英文短语例如 http json](https://github.com/caozhongqin/RealTimeCheat/blob/master/example.gif?raw=true)
